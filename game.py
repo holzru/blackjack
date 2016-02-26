@@ -194,11 +194,10 @@ def game(players, dealer):
             for hand in final_hands:
                 print "{} looses!".format((hand.player).name)
                 print "Bankroll is now: {}\n".format((hand.player).bankroll)
-                del final_hands[:]
             for hand in insured:
                 print "{} made a good decision buying insurance, you win {}\n".format((hand.player).name, hand.amount*2)
                 (hand.player).bankroll += hand.amount * 2
-
+            del final_hands[:]
         while dealer_hand.hand_value() < 17:
             hitter(dealer_hand, dealer, game_deck)
             print "Dealer has {} for a total of {}\n".format(dealer_hand.card_list(), dealer_hand.hand_value())
@@ -336,6 +335,7 @@ class Hand(object):
                     hand_total += 11
                 elif cards.count('A') >= 2 and hand_total < 10:
                     hand_total += 11
+
                 else:
                     hand_total += 1
         return hand_total
@@ -350,10 +350,6 @@ class Insurance(object):
     def __init__(self, player, amount):
         self.player = player
         self.amount = amount
-
-
-
-
 
 
 
